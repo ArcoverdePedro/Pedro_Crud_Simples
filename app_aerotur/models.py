@@ -16,3 +16,10 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.nome
+    
+class Pessoa(models.Model):
+    nome = models.CharField
+    idade = models.IntegerField(
+        validators=[MinValueValidator(18)] # Validador de idade minima de 18 anos
+    )
+    cpf = models.CharField(max_length=10)

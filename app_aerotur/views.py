@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Produto
+from .models import Produto, Pessoa
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProdutoForm
 
@@ -8,14 +8,16 @@ from .forms import ProdutoForm
 def home(request):
     """Página que lista todos os produtos, com possibilidade de ordenação"""
     # Recupera o parâmetro ordem da URL
-    ordem = request.GET.get('ordem', 'nome')  # ordem padrão por nome
+    pessoas = Pessoa.objects.all().order_by('nome') # Ordenado pelo nome das pessoas (a ao z)
 
-    if ordem == 'preco':
+    ordem_prod = request.GET.get('ordem_prod', 'nome')  # ordem padrão por nome
+
+    if ordem_prod == 'preco':
         produtos = Produto.objects.all().order_by('preco')  # Ordena por preço (menor ao maior)
     else:
         produtos = Produto.objects.all().order_by('nome')  # Ordena por nome (a ao z)
     
-    return render(request, 'home.html', {'produtos': produtos, 'ordem': ordem})
+    return render(request, 'home.html', {'produtos': produtos, 'ordemprod': ordem_prod, 'pessoas': pessoas})
 
 
 def criar_produto(request):
