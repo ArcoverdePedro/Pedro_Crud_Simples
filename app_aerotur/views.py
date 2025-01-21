@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from .models import Produto, Pessoa
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import ProdutoForm
+from .forms import ProdutoForm, PessoaForm
 
 
 # Create your views here.
 def home(request):
     """Página que lista todos os produtos, com possibilidade de ordenação"""
-    # Recupera o parâmetro ordem da URL
     pessoas = Pessoa.objects.all().order_by('nome') # Ordenado pelo nome das pessoas (a ao z)
 
     ordem_prod = request.GET.get('ordem_prod', 'nome')  # ordem padrão por nome
