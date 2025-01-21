@@ -19,7 +19,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('criar/', views.criar_produto, name='criar_produto'),
-    path('editar/<int:id>/', views.editar_produto, name='editar_produto'),
-    path('deletar/<int:id>/', views.deletar_produto, name='deletar_produto'),
+    path('editar_pessoa/<int:id>/', views.editar_pessoa, name='editar_pessoa'),
+    path('deletar_pessoa/<int:id>/', views.deletar_pessoa, name='deletar_pessoa'),
+    path('add_pessoa', views.add_pessoa, name='add_pessoa'),
 ]

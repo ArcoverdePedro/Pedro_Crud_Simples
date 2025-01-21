@@ -1,48 +1,40 @@
 from django.shortcuts import render
-from .models import Produto, Pessoa
+from .models import Pessoa
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import ProdutoForm, PessoaForm
+from .forms import PessoaForm
 
 
 # Create your views here.
 def home(request):
     """Página que lista todos os produtos, com possibilidade de ordenação"""
     pessoas = Pessoa.objects.all().order_by('nome') # Ordenado pelo nome das pessoas (a ao z)
-
-    ordem_prod = request.GET.get('ordem_prod', 'nome')  # ordem padrão por nome
-
-    if ordem_prod == 'preco':
-        produtos = Produto.objects.all().order_by('preco')  # Ordena por preço (menor ao maior)
-    else:
-        produtos = Produto.objects.all().order_by('nome')  # Ordena por nome (a ao z)
-    
-    return render(request, 'home.html', {'produtos': produtos, 'ordemprod': ordem_prod, 'pessoas': pessoas})
+    return render(request, 'home.html', {'pessoas': pessoas})
 
 
-def criar_produto(request):
+def add_pessoa(request):
     if request.method == 'POST':
-        form = ProdutoForm(request.POST)
+        form = PessoaForm(request.POST)
         if form.is_valid():
-            form.save()  # Salva o novo produto
+            form.save()  # Salva a nova pessoa
             return redirect('home')  # Redireciona para o home
     else:    
-        form = ProdutoForm()
-    return render(request, 'criar_produto.html', {'form': form})
+        form = PessoaForm()
+    return render(request, 'add_pessoa.html', {'form': form})
 
-def editar_produto(request, id):
-    produto = get_object_or_404(Produto, id=id)
+def editar_pessoa(request, id):
+    pessoa = get_object_or_404(Pessoa, id=id)
     if request.method == 'POST':
-        form = ProdutoForm(request.POST, instance=produto)
+        form = PessoaForm(request.POST, instance=pessoa)
         if form.is_valid():
             form.save()  # Salva as alterações
             return redirect('home')  # Redireciona para o home
     else:    
-        form = ProdutoForm(instance=produto)
-    return render(request, 'editar_produto.html', {'form': form})
+        form = PessoaForm(instance=pessoa)
+    return render(request, 'editar_pessoa.html', {'form': form})
 
-def deletar_produto(request, id):
-    produto = get_object_or_404(Produto, id=id)
+def deletar_pessoa(request, id):
+    pessoa = get_object_or_404(Pessoa, id=id)
     if request.method == 'POST':
-        produto.delete()  # Deleta o produto
+        pessoa.delete()  # Deleta a pessoa cadastrada
         return redirect('home')  # Redireciona para o home
-    return render(request, 'deletar_produto.html', {'produto': produto})
+    return render(request, 'deletar_pessoa.html', {'pessoa': pessoa})

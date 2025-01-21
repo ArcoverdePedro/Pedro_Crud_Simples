@@ -1,0 +1,2 @@
+def validadorcpf(cpf):
+    cpf
