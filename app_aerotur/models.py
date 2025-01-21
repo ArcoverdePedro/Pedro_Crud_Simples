@@ -13,7 +13,7 @@ class Pessoa(models.Model):
 
     def clean(self):
         if not validador(self.cpf):
-            raise ValidationError('o cpf não é válido.')
+            raise ValidationError('CPF inválido')
                
     def __str__(self):
         return self.nome
