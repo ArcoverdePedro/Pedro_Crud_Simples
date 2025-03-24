@@ -19,7 +19,4 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('editar_pessoa/<int:id>/', views.editar_pessoa, name='editar_pessoa'),
-    path('deletar_pessoa/<int:id>/', views.deletar_pessoa, name='deletar_pessoa'),
-    path('add_pessoa', views.add_pessoa, name='add_pessoa'),
 ]
