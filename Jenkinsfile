@@ -9,7 +9,7 @@ pipeline{
             steps{
                 sh"""
                 cd ${PATH}
-                docker-compose build --no-cache -t projeto_aerotur
+                docker-compose build --no-cache
                 """
                 
             }
