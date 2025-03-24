@@ -9,7 +9,7 @@ pipeline{
             steps{
                 sh"""
                 cd ${PATH}
-                docker-compose build --no-cache
+                ls
                 """
                 
             }
@@ -19,7 +19,6 @@ pipeline{
                 sh "cd ${PATH}"
                 echo "World"
                 sh "pwd"
-                sh "docker run -d -p 8000:8000 projeto_aerotur"
             }
         }
     }
