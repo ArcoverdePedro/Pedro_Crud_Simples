@@ -1,14 +1,16 @@
 pipeline{
     agent any
     environment{
-        PATH ="/home/pedro/Documentos/gittyup/projeto_aerotur/"    
+        PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"    
     } 
     stages{
         stage('checkout'){
             steps{
-                sh '''cd ${PATH}
+                sh '''
+                cd ${PATH}
                 git config --global pull.rebase false
-                git pull origin main'''
+                git pull origin main
+                '''
                 
             } 
         }
@@ -16,7 +18,8 @@ pipeline{
             steps{
                 sh'''
                 cd ${PATH}
-                docker build -t projeto_aerotur'''
+                docker build -t projeto_aerotur
+                '''
                 
             }
         }
