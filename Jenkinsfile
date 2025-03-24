@@ -18,7 +18,7 @@ pipeline{
             steps{
                 sh'''
                 cd ${PATH}
-                docker build -t projeto_aerotur
+                docker-compose build --no-cache -t projeto_aerotur
                 '''
                 
             }
