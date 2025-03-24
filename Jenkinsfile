@@ -11,8 +11,7 @@ pipeline {
                     sh '''
                         echo "Current REPO_PATH: ${REPO_PATH}"
                         cd ${REPO_PATH}
-                        echo 'Hello'
-                        ls
+                        docker-compose build --no-cache -t projeto_aerotur
                     '''
                 }
             }
@@ -24,7 +23,8 @@ pipeline {
                         echo "Test Stage"
                         cd ${REPO_PATH}
                         echo 'World'
-                        pwd
+                        docker-compose run -p 8000:8000 projeto_aerotur
+                        
                     '''
                 }
             }
