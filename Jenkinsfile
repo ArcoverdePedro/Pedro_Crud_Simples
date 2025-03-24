@@ -1,24 +1,36 @@
-pipeline{
+pipeline {
     agent any
-    environment{
-        PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"    
-    } 
-    stages{
-        stage('build'){
-            steps{
-                sh 'cd ${PATH}'
-                echo 'Hello'
-                sh 'ls'
-                
+    environment {
+        REPO_PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"
+    }
+    stages {
+        stage('build') {
+            steps {
+                script {
+                    // Adicionando um comando de depuração para garantir que o PATH seja correto
+                    echo "Current PATH: ${env.PATH}"
+                    sh '''
+                        echo "Before CD"
+                        ls -la
+                        cd ${REPO_PATH}
+                        echo "After CD"
+                        ls -la
+                        echo 'Hello'
+                    '''
+                }
             }
         }
-        stage('test'){
-            steps{
-                sh 'cd ${PATH}'
-                echo 'World'
-                sh 'pwd'
+        stage('test') {
+            steps {
+                script {
+                    sh '''
+                        echo "Test Stage"
+                        cd ${REPO_PATH}
+                        echo 'World'
+                        pwd
+                    '''
+                }
             }
         }
     }
 }
-
