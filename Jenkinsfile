@@ -8,6 +8,7 @@ pipeline{
                     ls -l
                     pwd
                     echo "Hello World"
+                    docker build -t projeto_aerotur .
                     '''
 
                 }
@@ -17,6 +18,7 @@ pipeline{
             steps{
                 echo "World"
                 sh 'pwd'
+                sh 'docker run -d -p 8000:8000 projeto_aerotur'
             }
         }
     }
