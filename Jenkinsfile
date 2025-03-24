@@ -5,6 +5,8 @@ pipeline{
             steps{
                 echo "Hello"
                 sh 'pwd'
+                cd '/home/pedro/Documentos/gittyup/projeto_aerotur/'
+                sh 'ls -l'
             }
         }
         stage('test'){
