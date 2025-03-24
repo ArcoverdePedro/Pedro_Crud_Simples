@@ -8,9 +8,6 @@ pipeline{
                     ls -l
                     pwd
                     echo "Hello World"
-
-                    
-                    
                     '''
 
                 }
