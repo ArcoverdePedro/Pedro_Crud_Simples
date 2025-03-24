@@ -4,13 +4,11 @@ pipeline{
         PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"    
     } 
     stages{
-
         stage('build'){
             steps{
-                sh '''
-                cd ${PATH}
-                ls
-                '''
+                sh 'cd ${PATH}'
+                echo 'Hello'
+                sh 'ls'
                 
             }
         }
