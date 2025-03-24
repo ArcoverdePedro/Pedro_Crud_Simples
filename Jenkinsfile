@@ -4,16 +4,7 @@ pipeline{
         PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"    
     } 
     stages{
-        stage('checkout'){
-            steps{
-                sh '''
-                cd ${PATH}
-                git config --global pull.rebase false
-                git pull origin main
-                '''
-                
-            } 
-        }
+        
         stage('build'){
             steps{
                 sh'''
