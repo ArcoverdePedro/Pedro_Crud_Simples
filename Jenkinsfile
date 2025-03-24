@@ -1,9 +1,9 @@
 pipeline{
     agent any
-        environment {
+    environment {
         REPO = "/home/$USER/Documentos/gittyup/projeto_aerotur/"
-        }    
-        stages{
+    }    
+    stages{
         stage('build'){
             steps{
                 echo "Hello"
