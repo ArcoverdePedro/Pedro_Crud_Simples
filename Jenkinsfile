@@ -1,7 +1,7 @@
 pipeline{
     agent any
         environment {
-        REPO = "/home/pedro/Documentos/gittyup/projeto_aerotur/"
+        REPO = "/home/$USER/Documentos/gittyup/projeto_aerotur/"
         }    
         stages{
         stage('build'){
