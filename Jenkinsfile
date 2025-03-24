@@ -6,20 +6,15 @@ pipeline{
     stages{
         stage('build'){
             steps{
-                dir('/home/pedro/Documentos/gittyup/projeto_aerotur/'){
-                    sh '''
-                    ls -l
-                    pwd
-                    echo "Hello World"
-                    docker build -t projeto_aerotur .
-                    '''
-
-                }
+                sh'''
+                cd ${PATH}
+                docker build -t projeto_aerotur
+                '''
             }
         }
         stage('test'){
             steps{
-                sh "cd /home/pedro/Documentos/gittyup/projeto_aerotur/"
+                sh "cd ${PATH}"
                 echo "World"
                 sh 'pwd'
                 sh 'docker run -d -p 8000:8000 projeto_aerotur'
