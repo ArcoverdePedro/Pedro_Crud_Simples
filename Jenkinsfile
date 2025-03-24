@@ -16,9 +16,9 @@ pipeline{
         }
         stage('test'){
             steps{
-                sh "cd ${PATH}"
-                echo "World"
-                sh "pwd"
+                sh 'cd ${PATH}'
+                echo 'World'
+                sh 'pwd'
             }
         }
     }
