@@ -1,6 +1,6 @@
 pipeline{
     agent any
-    environments{
+    environment{
         PATH ="/home/pedro/Documentos/gittyup/projeto_aerotur/"    
     } 
     stages{
