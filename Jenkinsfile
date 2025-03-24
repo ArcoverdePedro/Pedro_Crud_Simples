@@ -23,7 +23,7 @@ pipeline {
                         echo "Test Stage"
                         cd ${REPO_PATH}
                         echo 'World'
-                        docker run -p 8000:8000 projeto_aerotur
+                        docker run -p 8000:8000 -d projeto_aerotur
                         
                     '''
                 }
