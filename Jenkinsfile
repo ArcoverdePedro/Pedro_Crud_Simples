@@ -6,13 +6,13 @@ pipeline{
         stage('build'){
             steps{
                 echo "Hello"
-                pwd
+                sh pwd
             }
         }
         stage('test'){
             steps{
                 echo "World"
-                pwd
+                sh pwd
             }
         }
     }
