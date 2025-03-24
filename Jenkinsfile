@@ -4,13 +4,13 @@ pipeline{
         PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"    
     } 
     stages{
-        
+
         stage('build'){
             steps{
-                sh'''
+                sh"""
                 cd ${PATH}
                 docker-compose build --no-cache -t projeto_aerotur
-                '''
+                """
                 
             }
         }
