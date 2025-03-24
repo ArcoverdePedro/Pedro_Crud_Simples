@@ -7,10 +7,10 @@ pipeline{
 
         stage('build'){
             steps{
-                sh """
+                sh '''
                 cd ${PATH}
                 ls
-                """
+                '''
                 
             }
         }
