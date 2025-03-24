@@ -7,15 +7,12 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    // Adicionando um comando de depuração para garantir que o PATH seja correto
-                    echo "Current PATH: ${env.PATH}"
+                    // Usando REPO_PATH ao invés de PATH
                     sh '''
-                        echo "Before CD"
-                        ls -la
+                        echo "Current REPO_PATH: ${REPO_PATH}"
                         cd ${REPO_PATH}
-                        echo "After CD"
-                        ls -la
                         echo 'Hello'
+                        ls
                     '''
                 }
             }
