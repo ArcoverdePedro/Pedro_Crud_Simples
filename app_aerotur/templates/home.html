@@ -58,9 +58,13 @@
 <body>
 
 <div class="container">
-    <h1>Lista de Pessoas cadastradas Ordebada por nome</h1>
-    <td class="actions"></td>
-    <a href="" class="btn btn-primary btn-add-pessoa">Adicionar cadastro</a>
+    <h1>Lista de Pessoas cadastradas Ordenada por nome</h1>
+    
+    <div class="flex justify-center items-center w-full py-4">
+        <button data-modal-target="add_pessoa" data-modal-toggle="add_pessoa" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type="button">
+            Adicionar Cliente
+        </button>
+    </div>
     
 
 
@@ -99,12 +103,12 @@
                                 {{ pessoa.cpf }}
                             </td>
                             <td class="px-6 py-4">
-                                <button data-modal-target="editar_{{ pessoa.id }}" data-modal-toggle="editar_{{ pessoa.id }}" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                <button data-modal-target="editar_{{ pessoa.id }}" data-modal-toggle="editar_{{ pessoa.id }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type="button">
                                     Editar
                                 </button>
                             </td>
                             <td class="px-6 py-4">
-                                <button data-modal-target="deletar_{{ pessoa.id }}" data-modal-toggle="deletar_{{ pessoa.id }}" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                                <button data-modal-target="deletar_{{ pessoa.id }}" data-modal-toggle="deletar_{{ pessoa.id }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" type="button">
                                     Apagar
                                 </button>
                             </td>
@@ -119,7 +123,53 @@
             </table>
         </div>
 
-    
+        <div id="add_pessoa" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            Adicionar Cliente
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="add_pessoa">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <form class="p-4 md:p-5" method="post">
+                        {% csrf_token %}
+                        <div class="grid gap-4 mb-4 grid-cols-2">
+                            <div class="col-span-2">
+                                <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Nome                                
+                                </label>
+                                <input type="text" name="nome" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nome da pessoa" required>
+                            </div>
+                            <div class="col-span-2">
+                                <label for="idade" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Idade
+                                </label>
+                                <input type="text" name="idade" id="idade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="idade" required>
+                            </div>
+                            <div class="col-span-2">
+                                <label for="cpf" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                CPF                                
+                                </label>
+                                <input type="text" name="cpf" id="cpf" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CPF" required>
+                            </div>
+                        </div>
+                        <button type="submit" name="add_pessoa" class="flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                            Adicionar Cliente
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>    
 
     {% for pessoa in pessoas %}
     <div id="deletar_{{ pessoa.id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -135,15 +185,67 @@
                     <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                     </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apagar Pessoa de Nome: {{ pessoa.nome }}? </h3>
-                    <input type="hidden" name="id_pessoa" value="{{ pessoa.id }}">
-                    <button name="apagar_pessoa"  type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                        Apagar
-                    </button>
-                    <button data-modal-hide="deletar_{{ pessoa.id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                        Cancelar
+                    <form method="POST">
+                        {% csrf_token %}
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apagar Pessoa de Nome: {{ pessoa.nome }}? </h3>
+                        <input type="hidden" name="id_pessoa" value="{{ pessoa.id }}">
+                        <button name="deletar"  type="submit" class=" text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                            Apagar
+                        </button>
+                        <button data-modal-hide="deletar_{{ pessoa.id }}" type="button" class=" py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            Cancelar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editar_{{ pessoa.id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Editar Cliente {{ pessoa.id }}
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editar_{{ pessoa.id }}">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
                     </button>
                 </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5" method="post">
+                    {% csrf_token %}
+                    <div class="grid gap-4 mb-4 grid-cols-2">
+                        <input type="hidden" name="id_pessoa" value="{{ pessoa.id }}">
+                        <div class="col-span-2">
+                            <label for="nome" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Nome                                
+                            </label>
+                            <input type="text" name="nome" value="{{ pessoa.nome }}" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="nome da pessoa" required>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="idade" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Idade
+                            </label>
+                            <input type="text" value="{{ pessoa.idade }}" name="idade" id="idade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="idade" required>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="cpf" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            CPF                                
+                            </label>
+                            <input type="text" value="{{ pessoa.cpf }}" name="cpf" id="cpf" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CPF" required>
+                        </div>
+                    </div>
+                    <button type="submit" name="editar" class="flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        Editar Cliente
+                    </button>
+                </form>
             </div>
         </div>
     </div>

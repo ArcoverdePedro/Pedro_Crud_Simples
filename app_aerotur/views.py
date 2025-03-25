@@ -14,23 +14,23 @@ def home(request):
     context['pessoas'] = pessoas
     if request.method == 'POST':
         if 'deletar' in request.POST:
-            id_pessoa = request.get.POST['deletar']
+            id_pessoa = request.POST.get('id_pessoa')
             pessoa = get_object_or_404(Pessoa, id=id_pessoa)
             pessoa.delete()
             return redirect('home')
         if 'editar' in request.POST:
-            id_pessoa = request.get.POST['editar']
+            id_pessoa = request.POST.get('id_pessoa')
             pessoa = get_object_or_404(Pessoa, id=id_pessoa)
-            pessoa.nome = request.get.POST['nome']
-            pessoa.idade = request.get.POST['idade']
-            pessoa.cpf = request.get.POST['cpf']
+            pessoa.nome = request.POST.get('nome')
+            pessoa.idade = int(request.POST.get('idade'))
+            pessoa.cpf = request.POST.get('cpf')
             pessoa.save()
             return redirect('home')
         if 'add_pessoa' in request.POST:
             pessoa = Pessoa.objects.create(
-                nome = request.get.POST['nome'],
-                idade = request.get.POST['idade'],
-                cpf = request.get.POST['cpf']
+                nome = request.POST.get('nome'),
+                idade = int(request.POST.get('idade')),
+                cpf = request.POST.get('cpf')
             )
             return redirect('home')
     return render(request, 'home.html', context)
