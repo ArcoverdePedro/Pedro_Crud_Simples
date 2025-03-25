@@ -2,27 +2,26 @@ pipeline {
     agent any
     environment {
         REPO_PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"
-        IMAGE_NAME = "projeto_aerotur" // Nome da sua imagem
+        IMAGE_NAME = "projeto_aerotur"
     }
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
                 script {
                     sh '''
-                        echo "Current REPO_PATH: ${REPO_PATH}"
-                        cd ${REPO_PATH}
-                        docker-compose build -d
+                        echo "Entrando no diretório: ${env.REPO_PATH}"
+                        cd "${env.REPO_PATH}"
+                        docker-compose build
                     '''
                 }
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
                 script {
                     sh '''
                         echo "Test Stage"
-                        cd ${REPO_PATH}
-                        echo 'World'
+                        cd "${env.REPO_PATH}"
                         docker-compose up --build -d
                     '''
                 }
@@ -32,6 +31,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        echo "Limpando imagens não utilizadas..."
                         docker system prune -af
                     '''
                 }
