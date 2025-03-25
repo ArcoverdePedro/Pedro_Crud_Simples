@@ -6,6 +6,22 @@ pipeline {
         IMAGE_NAME = "projeto_aerotur" // Nome da sua imagem
     }
     stages {
+        stage('Limpeza Containers e Imagens') {
+            steps {
+                script {
+                    sh '''
+                        // Para o container em execução
+                        docker stop ${CONTAINER_NAME}
+                        // Remove o container
+                        docker rm ${CONTAINER_NAME}
+                        // Remove a imagem antiga
+                        docker rmi ${IMAGE_NAME}
+                        // Limpa imagens órfãs e containers não utilizados
+                        docker system prune -af
+                    '''
+                }
+            }
+        }
         stage('build') {
             steps {
                 script {
@@ -25,22 +41,6 @@ pipeline {
                         cd ${REPO_PATH}
                         echo 'World'
                         docker run -p 8000:8000 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}
-                    '''
-                }
-            }
-        }
-        stage('Limpeza Containers e Imagens') {
-            steps {
-                script {
-                    sh '''
-                        // Para o container em execução
-                        docker stop ${CONTAINER_NAME}
-                        // Remove o container
-                        docker rm ${CONTAINER_NAME}
-                        // Remove a imagem antiga
-                        docker rmi ${IMAGE_NAME}
-                        // Limpa imagens órfãs e containers não utilizados
-                        docker system prune -af
                     '''
                 }
             }
