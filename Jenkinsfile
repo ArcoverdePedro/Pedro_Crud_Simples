@@ -11,7 +11,7 @@ pipeline {
                     sh '''
                         echo "Current REPO_PATH: ${REPO_PATH}"
                         cd ${REPO_PATH}
-                        docker-compose build --no-cache
+                        docker-compose build -d
                     '''
                 }
             }
