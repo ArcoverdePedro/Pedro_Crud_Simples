@@ -9,6 +9,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        echo "Build Stage"
                         cd "${REPO_PATH}"
                         docker compose build --no-cache
                     '''
