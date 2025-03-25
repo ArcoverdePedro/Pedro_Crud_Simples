@@ -9,8 +9,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        echo "Entrando no diretório: ${env.REPO_PATH}"
-                        cd "${env.REPO_PATH}"
+                        cd "${REPO_PATH}"
                         docker-compose build
                     '''
                 }
@@ -21,7 +20,7 @@ pipeline {
                 script {
                     sh '''
                         echo "Test Stage"
-                        cd "${env.REPO_PATH}"
+                        cd "${REPO_PATH}"
                         docker-compose up --build -d
                     '''
                 }
