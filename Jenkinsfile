@@ -21,7 +21,7 @@ pipeline {
                     sh '''
                         echo "Test Stage"
                         cd "${REPO_PATH}"
-                        docker-compose up --build -d
+                        docker-compose up --build -d --remove-orphans
                     '''
                 }
             }
