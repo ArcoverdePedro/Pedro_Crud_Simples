@@ -29,5 +29,14 @@ pipeline {
                 }
             }
         }
+        stage('limpeza Containers') {
+            steps {
+                script {
+                    sh '''
+                        docker system prune -f
+                    '''
+                }
+            }
+        }
     }
 }
