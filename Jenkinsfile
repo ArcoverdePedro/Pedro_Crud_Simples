@@ -24,6 +24,7 @@ pipeline {
                         echo "Test Stage"
                         cd ${REPO_PATH}
                         echo 'World'
+                        docker rm -f ${CONTAINER_NAME} || true
                         docker run -p 8000:8000 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}
                     '''
                 }
@@ -33,7 +34,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        // Limpa imagens órfãs e containers não utilizados
                         docker system prune -af
                     '''
                 }
