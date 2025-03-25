@@ -2,6 +2,7 @@ version: '3'
 
 services:
   web:
+    image: projeto_aerotur
     build: .
     ports:
       - "8000:8000"

@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         REPO_PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"
-        CONTAINER_NAME = "projeto_aerotur_container" // Nome do seu container
         IMAGE_NAME = "projeto_aerotur" // Nome da sua imagem
     }
     stages {
@@ -12,7 +11,7 @@ pipeline {
                     sh '''
                         echo "Current REPO_PATH: ${REPO_PATH}"
                         cd ${REPO_PATH}
-                        docker-compose build --no-cache -t ${IMAGE_NAME} .
+                        docker-compose build --no-cache .
                     '''
                 }
             }
