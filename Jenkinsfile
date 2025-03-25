@@ -10,7 +10,7 @@ pipeline {
                 script {
                     sh '''
                         cd "${REPO_PATH}"
-                        docker-compose build --no-cache
+                        docker compose build --no-cache
                     '''
                 }
             }
