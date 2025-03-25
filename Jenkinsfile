@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('limpeza Containers') {
+        stage('Limpeza Containers') {
             steps {
                 script {
                     sh '''
