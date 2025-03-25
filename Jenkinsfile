@@ -11,7 +11,7 @@ pipeline {
                     sh '''
                         echo "Current REPO_PATH: ${REPO_PATH}"
                         cd ${REPO_PATH}
-                        docker build -t projeto_aerotur .
+                        docker build --no-cache -t projeto_aerotur .
                     '''
                 }
             }
