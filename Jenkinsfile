@@ -12,7 +12,7 @@ pipeline {
                     sh '''
                         echo "Current REPO_PATH: ${REPO_PATH}"
                         cd ${REPO_PATH}
-                        docker build --no-cache -t ${IMAGE_NAME} .
+                        docker-compose build --no-cache -t ${IMAGE_NAME} .
                     '''
                 }
             }
@@ -24,8 +24,7 @@ pipeline {
                         echo "Test Stage"
                         cd ${REPO_PATH}
                         echo 'World'
-                        docker rm -f ${CONTAINER_NAME} || true
-                        docker run -p 8000:8000 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}
+                        docker-compose up --build -d
                     '''
                 }
             }
