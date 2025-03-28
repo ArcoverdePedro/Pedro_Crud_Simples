@@ -4,6 +4,18 @@ pipeline {
         REPO_PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"
     }
     stages {
+        stage('Pull do Repositorio') {
+            steps{
+                script {
+                    sh '''
+                        echo "Pull Stage"
+                        cd "${REPO_PATH}"
+                        git config --global pull.rebase false
+                        git pull origin main
+                    '''
+                }
+            }
+        }
         stage('Build') {
             steps {
                 script {
