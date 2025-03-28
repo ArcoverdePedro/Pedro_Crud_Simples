@@ -1,6 +1,5 @@
 from multiprocessing import context
 from venv import create
-from django.shortcuts import render
 from .models import Pessoa
 from django.shortcuts import render, get_object_or_404, redirect
 

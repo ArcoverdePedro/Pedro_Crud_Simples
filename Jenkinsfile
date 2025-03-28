@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         REPO_PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"
-        IMAGE_NAME = "projeto_aerotur"
     }
     stages {
         stage('Build') {
