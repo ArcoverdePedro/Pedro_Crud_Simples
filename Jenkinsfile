@@ -10,6 +10,7 @@ pipeline {
                     sh '''
                         echo "Pull Stage"
                         cd "${REPO_PATH}"
+                        git config --global --add safe.directory /home/pedro/Documentos/gittyup/projeto_aerotur
                         git config --global pull.rebase false
                         git pull origin main
                     '''
