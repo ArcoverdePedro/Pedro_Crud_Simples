@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        REPO_PATH = "/home/pedro/Documentos/gittyup/projeto_aerotur/"
+        REPO_PATH = "/home/pedro/projeto_aerotur/"
     }
     stages {
         stage('Build') {
@@ -46,3 +46,4 @@ pipeline {
         }
     }
 }
+

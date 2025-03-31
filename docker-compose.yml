@@ -3,5 +3,5 @@ services:
     image: projeto_aerotur
     build: .
     ports:
-      - "8000:8000"
+      - "9000:9000"
     restart: unless-stopped
