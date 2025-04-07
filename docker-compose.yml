@@ -9,7 +9,7 @@ services:
       - DATABASE_USER=pedro
       - DATABASE_PASSWORD=pedrosenha
     networks:
-      - webnet
+      - interno
     depends_on:
       - db
     restart: unless-stopped
@@ -25,7 +25,7 @@ services:
       - DATABASE_USER=pedro
       - DATABASE_PASSWORD=pedrosenha
     networks:
-      - webnet
+      - interno
     depends_on:
       - db
     restart: unless-stopped
@@ -41,11 +41,11 @@ services:
       - POSTGRES_USER=pedro
       - POSTGRES_PASSWORD=pedrosenha
     networks:
-      - webnet
+      - interno
     restart: unless-stopped
 
 networks:
-  webnet:
+  interno:
 
 volumes:
   pgdata:
