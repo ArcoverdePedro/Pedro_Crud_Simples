@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        REPO_PATH = "/home/pedro/projeto_aerotur/"
+        REPO_PATH = "/home/pedro/Pedro_Crud_Simples/"
     }
     stages {
         stage('Build') {

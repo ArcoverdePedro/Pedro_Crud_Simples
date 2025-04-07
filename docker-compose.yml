@@ -1,7 +1,51 @@
 services:
-  web:
-    image: projeto_aerotur
-    build: .
+  app1:
+    build: ./app1
     ports:
-      - "9000:9000"
+      - "8001:8000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=crud_pedro
+      - DATABASE_USER=pedro
+      - DATABASE_PASSWORD=pedrosenha
+    networks:
+      - webnet
+    depends_on:
+      - db
     restart: unless-stopped
+    
+
+  app2:
+    build: ./app2
+    ports:
+      - "8002:8000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=crud_pedro
+      - DATABASE_USER=pedro
+      - DATABASE_PASSWORD=pedrosenha
+    networks:
+      - webnet
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=crud_pedro
+      - POSTGRES_USER=pedro
+      - POSTGRES_PASSWORD=pedrosenha
+    networks:
+      - webnet
+    restart: unless-stopped
+
+networks:
+  webnet:
+
+volumes:
+  pgdata:
