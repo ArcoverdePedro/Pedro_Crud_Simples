@@ -50,30 +50,12 @@ services:
     networks:
       - interno
     depends_on:
-<<<<<<< HEAD
       db:
         condition: service_healthy
     command: >
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
-=======
-      - db
-    restart: unless-stopped
-
-  db:
-    image: postgres:alpine
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=crud_pedro
-      - POSTGRES_USER=pedro
-      - POSTGRES_PASSWORD=pedrosenha
-    networks:
-      - interno
->>>>>>> main
     restart: unless-stopped
 
 networks:
