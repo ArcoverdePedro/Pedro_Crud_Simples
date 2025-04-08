@@ -28,7 +28,7 @@ services:
       - DATABASE_USER=pedro
       - DATABASE_PASSWORD=pedrosenha
     networks:
-      - interno
+      - webnet
     depends_on:
       db:
         condition: service_healthy
@@ -48,7 +48,7 @@ services:
       - DATABASE_USER=pedro
       - DATABASE_PASSWORD=pedrosenha
     networks:
-      - interno
+      - webnet
     depends_on:
       db:
         condition: service_healthy
@@ -59,7 +59,7 @@ services:
     restart: unless-stopped
 
 networks:
-  interno:
+  webnet:
 
 volumes:
   pgdata:
