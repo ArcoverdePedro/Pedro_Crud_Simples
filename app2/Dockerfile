@@ -4,7 +4,10 @@ WORKDIR /app
 
 COPY requirements.txt /app/
 
-RUN pip install --no-cache-dir -r  requirements.txt
+RUN apt update\
+    && apt install -y --no-install-recommends postgresql-client build-essential libpq-dev\
+    && rm -rf /var/lib/apt/lists/*\
+    && pip install --no-cache-dir -r  requirements.txt
 
 COPY . .
 

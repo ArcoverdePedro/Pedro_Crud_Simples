@@ -1,4 +1,23 @@
 services:
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=crud_pedro
+      - POSTGRES_USER=pedro
+      - POSTGRES_PASSWORD=pedrosenha
+    networks:
+      - webnet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pedro -d crud_pedro"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
   app1:
     build: ./app1
     ports:
@@ -11,9 +30,13 @@ services:
     networks:
       - webnet
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     restart: unless-stopped
-    
 
   app2:
     build: ./app2
@@ -27,21 +50,12 @@ services:
     networks:
       - webnet
     depends_on:
-      - db
-    restart: unless-stopped
-
-  db:
-    image: postgres:alpine
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=crud_pedro
-      - POSTGRES_USER=pedro
-      - POSTGRES_PASSWORD=pedrosenha
-    networks:
-      - webnet
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     restart: unless-stopped
 
 networks:
