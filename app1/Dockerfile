@@ -11,6 +11,6 @@ RUN apt update\
 
 COPY . .
 
-EXPOSE 8002
+EXPOSE 8001
 
 CMD ["python","manage.py","runserver","0.0.0.0:8000"]

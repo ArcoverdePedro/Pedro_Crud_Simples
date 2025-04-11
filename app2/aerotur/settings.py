@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +30,7 @@ SECRET_KEY = 'django-insecure-dta3df*@efe%x_=mzm)fsw2gb1x_b8b+de=7=w4rrxt9g8j^f1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,13 +79,15 @@ WSGI_APPLICATION = 'aerotur.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+DATABASE_HOST = os.environ.get('DATABASE_HOST_DOCKER') if os.environ.get('DOCKER_ENV') else os.environ.get('DATABASE_HOST_LOCAL')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME', 'crud_pedro'),
-        'USER': os.environ.get('DATABASE_USER', 'pedro'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'pedrosenha'),
-        'HOST': os.environ.get('DATABASE_HOST', 'db'),  # Nome do serviço no docker-compose
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': DATABASE_HOST,  # Nome do serviço no docker-compose
         'PORT': '5432',
     }
 }

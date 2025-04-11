@@ -1,18 +1,18 @@
 services:
-  db:
+  postgres:
     image: postgres:alpine
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - POSTGRES_DB=crud_pedro
-      - POSTGRES_USER=pedro
-      - POSTGRES_PASSWORD=pedrosenha
+      POSTGRES_USER: pedro
+      POSTGRES_PASSWORD: pedrosenha
     networks:
       - webnet
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pedro -d crud_pedro"]
+      test: ["CMD-SHELL", "pg_isready -U pedro"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -23,14 +23,11 @@ services:
     ports:
       - "8001:8000"
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_NAME=crud_pedro
-      - DATABASE_USER=pedro
-      - DATABASE_PASSWORD=pedrosenha
+      DOCKER_ENV: 'true'
     networks:
       - webnet
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
     command: >
       sh -c "python manage.py makemigrations &&
@@ -43,14 +40,11 @@ services:
     ports:
       - "8002:8000"
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_NAME=crud_pedro
-      - DATABASE_USER=pedro
-      - DATABASE_PASSWORD=pedrosenha
+      DOCKER_ENV: 'true'
     networks:
       - webnet
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
     command: >
       sh -c "python manage.py makemigrations &&
