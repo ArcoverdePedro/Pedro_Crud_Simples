@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:slim
 
 WORKDIR /app
 
@@ -11,6 +11,6 @@ RUN apt update\
 
 COPY . .
 
-EXPOSE 8001
+EXPOSE 8001 8006
 
 CMD ["python","manage.py","runserver","0.0.0.0:8000"]
