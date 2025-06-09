@@ -29,6 +29,7 @@ pipeline {
         stage('Limpeza Containers e Imagens') {
             steps {
                 script {
+                    echo "limpeza de cache do docker"
                     sh '''
                         echo "Limpando imagens não utilizadas..."
                         docker system prune -af
