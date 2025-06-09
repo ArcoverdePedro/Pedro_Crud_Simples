@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AppAeroturConfig(AppConfig):
+class AppCrudConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'app_aerotur'
+    name = 'app_crud'

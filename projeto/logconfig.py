@@ -43,7 +43,7 @@ def get_logging_config():
         "disable_existing_loggers": False,
         "handlers": {
             "loguru": {
-                "class": "aerotur.logconfig.InterceptHandler",  # classe do interceptador
+                "class": "projeto.logconfig.InterceptHandler",  # classe do interceptador
             },
         },
         "root": {

@@ -10,7 +10,6 @@ def home(request):
     context = {}
     """Página que lista todos os produtos, com possibilidade de ordenação"""
     pessoas = Pessoa.objects.all().order_by('nome')
-    context['pessoas'] = pessoas
     if request.method == 'POST':
         if 'deletar' in request.POST:
             id_pessoa = request.POST.get('id_pessoa')
@@ -32,4 +31,6 @@ def home(request):
                 cpf = request.POST.get('cpf')
             )
             return redirect('home')
-    return render(request, "1_app_aerotur/home/home.html", context)
+        
+    context['pessoas'] = pessoas
+    return render(request, "1_app_crud/home/home.html", context)
