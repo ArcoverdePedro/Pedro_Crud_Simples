@@ -4,6 +4,7 @@ import logging
 from pathlib import Path
 from loguru import logger
 
+
 def setup_loguru():
     # Define o caminho dos logs
     LOG_DIR = Path("logs")
@@ -18,24 +19,26 @@ def setup_loguru():
         format="| {level} | {name}:{function}:{line} | {message}",
         level="INFO",
         rotation="00:00",
-        retention="30 days", # Mantém logs por 30 dias
-        encoding="utf-8"
+        retention="30 days",  # Mantém logs por 30 dias
+        encoding="utf-8",
     )
-    #aparecer no terminal
+    # aparecer no terminal
     logger.add(sys.stdout, level="DEBUG")
 
     for log_file in LOG_DIR.glob("app_*.log"):
         os.chmod(log_file, 0o664)
+
 
 class InterceptHandler(logging.Handler):
     """
     Handler para interceptar logs do módulo de logging padrão do Python
     e redirecioná-los para o Loguru.
     """
+
     def emit(self, record):
-        # Obtém os logs enviados com o logging para o loguru automaricamente
         logger_opt = logger.opt(depth=6, exception=record.exc_info)
         logger_opt.log(record.levelname, record.getMessage())
+
 
 def get_logging_config():
     return {
@@ -43,7 +46,7 @@ def get_logging_config():
         "disable_existing_loggers": False,
         "handlers": {
             "loguru": {
-                "class": "projeto.logconfig.InterceptHandler",  # classe do interceptador
+                "class": "projeto.logconfig.InterceptHandler",
             },
         },
         "root": {
