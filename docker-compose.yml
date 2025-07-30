@@ -1,3 +1,5 @@
+version: '3.8'  # Versão explícita para garantir compatibilidade
+
 services:
   postgres:
     image: postgres:alpine
@@ -5,8 +7,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data  # Volume persistente
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Script de inicialização
     environment:
       POSTGRES_USER: pedro
       POSTGRES_PASSWORD: pedrosenha
@@ -33,7 +35,7 @@ services:
         condition: service_healthy
       prometheus:
         condition: service_started
-    command: ['sh','/app/commands.sh']
+    command: ['sh', '/usr/src/app/commands.sh']
     restart: unless-stopped
 
   node-exporter:
@@ -53,29 +55,36 @@ services:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - '--path.rootfs=/rootfs'
-      
+
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus_app
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Configuração do Prometheus
     ports:
       - "9090:9090"
     networks:
-    - webnet
+      - webnet
+    restart: unless-stopped  # Adicionado para garantir resilência
 
   grafana:
     image: grafana/grafana:latest
     container_name: grafana_app
     ports:
       - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana  # Volume persistente para dados do Grafana
     depends_on:
       - prometheus
     networks:
-    - webnet
+      - webnet
+    restart: unless-stopped
 
+# --- Definições de Redes e Volumes ---
 networks:
   webnet:
+    driver: bridge  # Explícito (opcional, mas recomendado)
 
 volumes:
-  pgdata:
+  pgdata:  # Volume para PostgreSQL
+  grafana-storage:  # Volume para Grafana (adicionado)
