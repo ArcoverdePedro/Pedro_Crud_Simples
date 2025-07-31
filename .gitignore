@@ -2,6 +2,9 @@
 venv/
 .venv/
 
+# Logs
+logs/*
+
 # Coleta de estáticos
 fontawesomefree
 admin
