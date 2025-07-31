@@ -64,4 +64,8 @@ def home(request):
 
     context["pessoas"] = pessoas
 
-    return render(request, "1_app_crud/home/home.html", context)
+    return render(
+        request,
+        "1_app_crud/home/home.html",
+        context,
+    )

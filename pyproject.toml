@@ -15,6 +15,7 @@ dependencies = [
     "dotenv==0.9.9",
     "fontawesomefree==6.6.0",
     "googleapis-common-protos==1.70.0",
+    "granian>=2.5.0",
     "grpcio==1.71.0",
     "idna==3.10",
     "importlib-metadata==8.6.1",
