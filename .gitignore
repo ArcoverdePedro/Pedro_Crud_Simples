@@ -1,6 +1,14 @@
-#env
-venv
-.venv
-__pycache__
+# Env
+venv/
+.venv/
+
+# Coleta de estáticos
 fontawesomefree
 admin
+
+# Diretório com os pacotes instalados
+__pypackages__/
+
+# Arquivos temporários ou cache
+.cache/
+__pycache__
